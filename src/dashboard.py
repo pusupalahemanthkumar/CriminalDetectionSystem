@@ -60,6 +60,7 @@ class pdashboard:
     def __init__(self,db,root,obj):
         self.root=root
         self.db=db
+        self.obj=obj
         self.root.title("Login system")
         self.root.geometry("1199x600+100+50")
         self.root.resizable(False,False)

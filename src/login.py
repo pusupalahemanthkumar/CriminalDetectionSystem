@@ -3,6 +3,7 @@ from PIL import ImageTk
 import dashboard
 
 from userController import authenticate_user
+from util.config import get_bg_image_url
 
 class login:
     def __init__(self,db,root,disptext):
@@ -14,7 +15,7 @@ class login:
         self.root.resizable(True,True)
 
         #====BG Image=====
-        self.bg=ImageTk.PhotoImage(file=r"C:\Users\Welcome\Desktop\MiniProject\ScamProject\Resources\images\login.jpg")
+        self.bg=ImageTk.PhotoImage(file=get_bg_image_url())
         self.bg_Image=Label(self.root,image=self.bg).place(x=0,y=0,relwidth=1.3,relheight=1)
         
         Frame_login=Frame(self.root,bg="white")
@@ -28,7 +29,7 @@ class login:
         self.txt_user.place(x=90,y=170,width=350,height=35)
 
         lbl_pass=Label(Frame_login,text="Password",font=("Goudy old style",15,"bold"),fg="black",bg="white").place(x=90,y=210)
-        self.txt_pass=Entry(Frame_login,font=(" times new roman",15),bg="lightgray")
+        self.txt_pass=Entry(Frame_login,font=(" times new roman",15),bg="lightgray",show="*")
         self.txt_pass.place(x=90,y=240,width=350,height=35)
 
         Login_btn=Button(self.root,text="Login",fg="black",bg="white",font=("times new roman",20),command=self.dash).place(x=300,y=470,width=180,height=40)
@@ -48,7 +49,7 @@ class login:
                 self.root.withdraw()
         else:
             print("Login Fail")
-            Label(self.root,text="login fail",font=("Goudy old style",15,"bold"),fg="black",bg="white").place(x=300,y=100)
+            Label(self.root,text="login fail",font=("Goudy old style",15,"bold"),fg="red",bg="white").place(x=300,y=100)
 
 
         

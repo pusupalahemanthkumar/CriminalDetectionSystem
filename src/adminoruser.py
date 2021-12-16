@@ -3,6 +3,7 @@ from PIL import ImageTk
 import login
 
 from util.db_conn import connect_db
+from util.config import get_bg_image_url
 db=connect_db()
 
 class adminoruser:
@@ -13,7 +14,7 @@ class adminoruser:
         self.root.resizable(False,False)
 
         #====BG Image=====
-        self.bg=ImageTk.PhotoImage(file=r"C:\Users\Welcome\Desktop\MiniProject\ScamProject\Resources\images\login.jpg")
+        self.bg=ImageTk.PhotoImage(file=get_bg_image_url())
         self.bg_Image=Label(self.root,image=self.bg).place(x=0,y=0,relwidth=1.3,relheight=1)
         admin_btn=Button(self.root,text="Admin",fg="black",bg="white",font=("times new roman",20,"bold"),command=adlog).place(x=90,y=210,width=180,height=40)
         user_btn=Button(self.root,text="User",fg="black",bg="white",font=("times new roman",20,"bold"),command=log).place(x=90,y=280,width=180,height=40)
