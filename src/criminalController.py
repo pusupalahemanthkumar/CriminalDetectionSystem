@@ -15,6 +15,17 @@ def get_criminal_tracker_data(db):
     except Exception:
         print("-------Something Went Wrong!--------")
 
+
+def add_criminal(db,name,crimate_rate):
+    criminal=db["criminal"]
+    try:
+        criminal_id=criminal.insert_one({"name":name,"crimate_rate":crimate_rate})
+        if(criminal_id):
+            print(criminal_id)
+            payload={"message":"success","status":200}
+    except Exception:
+        print("unable to add criminal data")
+
 def add_criminal_location(db,name,location):
     criminal_tracker=db["criminalTracker"]
     try:
