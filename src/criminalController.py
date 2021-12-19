@@ -1,6 +1,8 @@
 import datetime
 import pprint
 from util.db_conn import connect_db
+from util.mailer import Mailer
+from datetime import datetime
 
 def get_criminal_tracker_data(db):
     criminal_tracker=db["criminalTracker"]
@@ -29,8 +31,14 @@ def add_criminal(db,name,crimate_rate):
 def add_criminal_location(db,name,location):
     criminal_tracker=db["criminalTracker"]
     try:
-        criminal_trace_id= criminal_tracker.insert_one({"name":name,"location":location,"timestamp":datetime.datetime.now()})
+        print("in add c loca-1")
+        criminal_trace_id= criminal_tracker.insert_one({"name":name,"location":location,"date":str(datetime.today().strftime('%Y-%m-%d')),"timestamp":datetime.now()})
+        print("in add c loca-2")
         if(criminal_trace_id):
+            print("in add c loca-3")
+            if(criminal_tracker.find_one({"name":name,"location":location,"date":str(datetime.today().strftime('%Y-%m-%d'))})!=None):
+                print("in add c loca-4")
+                Mailer().send('18h61a05n3@cvsr.ac.in',name,location)
             payload={"message":"success","status":200}
             return payload
     except Exception:
